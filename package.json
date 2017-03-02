@@ -1,0 +1,19 @@
+{
+  "name": "nodejs-media-player",
+  "version": "1.0.0",
+  "description": "NodeJS media player",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/egrm/nodejs-media-player.git"
+  },
+  "author": "Egor Gromyko <egorgromyko@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/egrm/nodejs-media-player/issues"
+  },
+  "homepage": "https://github.com/egrm/nodejs-media-player#readme"
+}
