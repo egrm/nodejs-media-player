@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/egrm/nodejs-media-player/issues"
   },
-  "homepage": "https://github.com/egrm/nodejs-media-player#readme"
+  "homepage": "https://github.com/egrm/nodejs-media-player#readme",
+  "dependencies": {
+    "express": "^4.15.0"
+  }
 }
