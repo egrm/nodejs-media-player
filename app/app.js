@@ -2,6 +2,8 @@ var express = require('express');
 var fs = require('fs');
 var app = express();
 var io = require('socket.io')();
+var ss = require ('socket.io-stream');
+var path = require('path');
 var chokidar = require('chokidar');
 
 app.use('/public', express.static('./app/public'))

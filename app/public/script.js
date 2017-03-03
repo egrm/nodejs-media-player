@@ -3,7 +3,6 @@ var songList = document.querySelector('.song-list');
 var audioPlayer = document.querySelector('.audio-player');
 var currentSongLabel = document.querySelector('.current-song-label');
 
-
 socket.on('connect', function () {
 
   socket.on('giveLibrary', function renderLibrary (data) {
