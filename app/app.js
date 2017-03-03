@@ -2,6 +2,7 @@ var express = require('express');
 var fs = require('fs');
 var app = express();
 var io = require('socket.io')();
+var chokidar = require('chokidar');
 
 app.use('/public', express.static('./app/public'))
 
@@ -24,7 +25,7 @@ io.on('connection', function(socket) {
     var mediaFilesDir = './app/media/';
 
     var songNames = fs.readdirSync(mediaFilesDir);
-
+    
     socket.emit('giveLibrary', {
       songNames : songNames
     });
