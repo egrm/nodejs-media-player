@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 
-app.set('view engine', 'pug');
+app.set('view engine', 'ejs');
 app.set('views', './app/views/');
 
 app.get('/', function (req, res) {
