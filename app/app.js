@@ -2,10 +2,10 @@ var express = require('express');
 var app = express();
 
 app.set('view engine', 'pug');
-app.set('views', './views/');
+app.set('views', './app/views/');
 
 app.get('/', function (req, res) {
-  res.send('hello world');
+  res.render('index');
 });
 
 var server = app.listen(3000, function() {
