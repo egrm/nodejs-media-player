@@ -2,8 +2,10 @@ var socket = io();
 var songList = document.querySelector('.song-list');
 var audioPlayer = document.querySelector('.audio-player');
 var currentSongLabel = document.querySelector('.current-song-label');
+var uploadFileForm = document.querySelector("#upload-file-form");
 
 var uploadFileButton = document.querySelector('#upload-file-button');
+var uploadFileField = document.querySelector('#upload-field');
 
 socket.on('connect', function () {
 
@@ -35,14 +37,22 @@ socket.on('connect', function () {
 
   });
 
-  uploadFileButton.addEventListener('change', function (e) {
+  function FileDragHover(e) {
+    e.target.classname = (e.type === 'dragover' ? 'hover' : '')
+    console.log(e.target.files);
+  }
+
+  uploadFileField.addEventListener('dragover', FileDragHover);
+  uploadFileField.addEventListener('dragleave', FileDragHover);
+  uploadFileField.addEventListener('drop', FileDragHover);
+
+  uploadFileForm.addEventListener('change', function (e) {
     var file = e.target.files[0];
     var stream = ss.createStream();
 
     ss(socket).emit('uploadSong', stream, {name: file.name, size: file.size});
     ss.createBlobReadStream(file).pipe(stream);
   });
-
 
 socket.on('disconnect', function () {
   console.log('you failed');

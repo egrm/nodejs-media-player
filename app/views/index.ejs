@@ -19,12 +19,24 @@
     <li>Library is empty</li>
   </ul>
 
-  <div class="upload-field">
+  <!-- <input type="file" accept="audio/mp3" id="upload-file-button" style="display: none;" >
+  <div id="upload-field">
     <p>Drop your mp3<br>music here</p>
-    <p>or</p>
-    <input type="file" accept="audio/mp3" id="upload-file-button" style="display: none;" >
-    <label for="upload-file-button"><u>Choose file</u></label>
   </div>
+  <label style="cursor: pointer;" for="upload-file-button">
+    <p>or <u>click</u> to select</p>
+  </label> -->
+
+<form id="upload-file-form" enctype="multipart/form-data">
+  <input type="file" accept="audio/mp3" id="upload-file-button" style="display: none;" >
+  <div id="upload-field">
+    <p>Drop your mp3<br>music here</p>
+  </div>
+  <label style="cursor: pointer;" for="upload-file-button">
+    <p>or <u>click</u> to select</p>
+  </label>
+  <button type="submit">Upload</button>
+</form>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
 <script src="/public/socketio-stream.js"></script>
