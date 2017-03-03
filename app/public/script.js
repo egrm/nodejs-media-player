@@ -1,5 +1,6 @@
 var socket = io();
 var songList = document.querySelector('.song-list');
+var currentSongLabel = document.querySelector('.current-song-label');
 
 socket.on('connect', function () {
 
@@ -17,6 +18,7 @@ socket.on('connect', function () {
 
     Object.keys(songs).forEach (function (key) {
       songs[key].addEventListener('click', function (e) {
+        console.log('Song clicked: ' + this.textContent);
 
         socket.emit('songClicked', {
           songName : this.textContent
