@@ -2,7 +2,7 @@
   "name": "nodejs-media-player",
   "version": "1.0.0",
   "description": "NodeJS media player",
-  "main": "app.js",
+  "main": "app/app.js",
   "scripts": {
     "test": "test"
   },
