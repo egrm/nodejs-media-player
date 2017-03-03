@@ -39,6 +39,11 @@ io.on('connection', function(socket) {
       persistent: true
     });
 
+    ss(socket).on('uploadSong', function (stream, data) {
+      var filename = mediaFilesDir + path.basename(data.name);
+      stream.pipe(fs.createWriteStream(filename));
+    });
+
     watcher.on('all', function (event, path) {
       var songNames = fs.readdirSync(mediaFilesDir).filter(isMusicFile);
       socket.emit('giveLibrary', {
