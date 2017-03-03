@@ -1,6 +1,8 @@
 var socket = io();
 var songList = document.querySelector('.song-list');
+var audioPlayer = document.querySelector('.audio-player');
 var currentSongLabel = document.querySelector('.current-song-label');
+
 
 socket.on('connect', function () {
 
@@ -19,7 +21,10 @@ socket.on('connect', function () {
 
     Object.keys(songs).forEach (function (key) {
       songs[key].addEventListener('click', function (e) {
-        console.log('Song clicked: ' + this.textContent);
+        mediaFilesDir = '/public/media/';
+
+        audioPlayer.src = mediaFilesDir + this.textContent;
+        currentSongLabel.innerHTML = 'Currently playing <br>' + this.textContent;
 
         socket.emit('songClicked', {
           songName : this.textContent
@@ -28,7 +33,6 @@ socket.on('connect', function () {
     }); // forEach
 
   });
-
 
 }); // on connect
 

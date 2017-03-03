@@ -30,7 +30,7 @@ io.attach(server);
 
 io.on('connection', function(socket) {
     console.log('user connected: ' + socket.id);
-    var mediaFilesDir = './app/media/';
+    var mediaFilesDir = './app/public/media/';
 
     var watcher = chokidar.watch(mediaFilesDir, {
       ignored: /(^|[\/\\])\../,
