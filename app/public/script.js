@@ -1,19 +1,35 @@
 var socket = io();
-var songs = document.querySelector('.song-list').children;
+var songList = document.querySelector('.song-list');
 
 socket.on('connect', function () {
 
-  Object.keys(songs).forEach (function (key) {
-    songs[key].addEventListener('click', function (e) {
+  socket.on('giveLibrary', function renderLibrary (data) {
 
-      socket.emit('songClicked', {
-        songName : this.textContent
-      })
-    })
+    songsView = '';
+
+    data.songNames.forEach(function (elem, index, array) {
+      songsView += '<li class="song">' + elem + '</li>';
+    });
+
+    songList.innerHTML = songsView;
+
+    var songs = document.querySelector('.song-list').children;
+
+    Object.keys(songs).forEach (function (key) {
+      songs[key].addEventListener('click', function (e) {
+
+        socket.emit('songClicked', {
+          songName : this.textContent
+        }); // emit
+      }); // addEventListener
+    }); // forEach
+
   });
-});
+
+
+}); // on connect
 
 socket.on('event', function () {});
 socket.on('disconnect', function () {
-  
+
 });

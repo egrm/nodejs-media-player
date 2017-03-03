@@ -20,16 +20,10 @@
     <button class="media-button step-forward"><i class="fa fa-step-forward" aria-hidden="true"></i></button>
   </div>
   <br><br>
-  <p>Choose a song</p>
+  <p>Choose a song below</p>
 
   <ul class="song-list">
-    <% if (songNames !== [] || songNames !== undefined) { %>
-      <% songNames.forEach(function (elem, index, array) {%>
-        <li class="song"><%= elem %></li>
-      <% }); %>
-    <% } else { %>
-      <li class="song">Error</li>
-    <% } %>
+    <li>Library is empty</li>
   </ul>
 
   <div class="upload-field">

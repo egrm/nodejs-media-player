@@ -10,15 +10,7 @@ app.set('view engine', 'ejs');
 app.set('views', './app/views/');
 
 app.get('/', function(req, res) {
-
-    var mediaFilesDir = './app/media/';
-    var songNames = fs.readdirSync(mediaFilesDir)
-
-
-    console.log(songNames);
-    res.render('index', {
-        songNames: songNames
-    });
+    res.render('index');
 });
 
 var server = app.listen(3000, function() {
@@ -28,11 +20,20 @@ var server = app.listen(3000, function() {
 io.attach(server);
 
 io.on('connection', function(socket) {
-    console.log('user connected');
+    console.log('user connected: ' + socket.id);
+    var mediaFilesDir = './app/media/';
+
+    var songNames = fs.readdirSync(mediaFilesDir);
+
+    socket.emit('giveLibrary', {
+      songNames : songNames
+    });
+
     socket.on('songClicked', function playSong (data) {
 
     });
+
     socket.on('disconnect', function() {
-        console.log('user disconnected');
+        console.log('user disconnected: ' + socket.id);
     });
 });
