@@ -19,10 +19,13 @@
   </div>
 
   <ul class="song-list">
-    <li class="song">Lorem Ipsum - Dolor Uit Amet</li>
-    <li class="song">Lorem Ipsum - Dolor Uit Amet</li>
-    <li class="song">Lorem Ipsum - Dolor Uit Amet</li>
-    <li class="song">Lorem Ipsum - Dolor Uit Amet</li>
+    <% if (songNames !== [] || songNames !== undefined) { %>
+      <% songNames.forEach(function (elem, index, array) {%>
+        <li class="song"><%= elem %></li>
+      <% }); %>
+    <% } else { %>
+      <li class="song">Error</li>
+    <% } %>
   </ul>
 
 </body>
