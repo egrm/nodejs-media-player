@@ -18,16 +18,34 @@ var server = app.listen(3000, function() {
     console.log('node music player listening on port 3000');
 });
 
+function isMusicFile (filename) {
+  if (/^\.\w+$/.test(filename)) {
+    return false
+  } else {
+    return true;
+  }
+};
+
 io.attach(server);
 
 io.on('connection', function(socket) {
     console.log('user connected: ' + socket.id);
     var mediaFilesDir = './app/media/';
 
-    var songNames = fs.readdirSync(mediaFilesDir);
-    
+    var songNames = fs.readdirSync(mediaFilesDir).filter(isMusicFile);
+
+console.log(songNames);
     socket.emit('giveLibrary', {
       songNames : songNames
+    });
+
+    var watcher = chokidar.watch('./app/media', {persistent: true});
+
+    watcher.on('change', function(path) {
+      socket.emit('giveLibrary', {
+        songNames : songNames
+      });
+      console.log('something happened');
     });
 
     socket.on('songClicked', function playSong (data) {
