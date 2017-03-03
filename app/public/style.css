@@ -2,7 +2,7 @@ body {
   max-width: 960px;
   margin: auto;
   text-align: center;
-  
+
   font: 16px/1.5 "Source Code Pro";
 
   background: url('http://cdn.backgroundhost.com/backgrounds/subtlepatterns/blizzard.png');
@@ -26,10 +26,10 @@ h1 {
   width: 4rem;
   border-radius: 50%;
   text-align: center;
-  background: white;
+  background: transparent;
   border-style: solid;
   border-color: black;
-
+  border-width: thin;
 }
 
 .media-button:hover {
@@ -47,7 +47,6 @@ h1 {
   transition: all .3s;
 
   margin-bottom: 5px;
-  border: 1px solid black;
   display: block;
 }
 
