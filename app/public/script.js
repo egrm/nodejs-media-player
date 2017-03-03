@@ -6,7 +6,7 @@ socket.on('connect', function () {
   Object.keys(songs).forEach (function (key) {
     songs[key].addEventListener('click', function (e) {
 
-      socket.emit('playSong', {
+      socket.emit('songClicked', {
         songName : this.textContent
       })
     })
@@ -14,4 +14,6 @@ socket.on('connect', function () {
 });
 
 socket.on('event', function () {});
-socket.on('disconnect', function () {});
+socket.on('disconnect', function () {
+  
+});

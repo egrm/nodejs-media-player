@@ -11,7 +11,7 @@ app.set('views', './app/views/');
 
 app.get('/', function(req, res) {
 
-    var mediaFilesDir = './app/public/media/';
+    var mediaFilesDir = './app/media/';
     var songNames = fs.readdirSync(mediaFilesDir)
 
 
@@ -29,6 +29,9 @@ io.attach(server);
 
 io.on('connection', function(socket) {
     console.log('user connected');
+    socket.on('songClicked', function playSong (data) {
+
+    });
     socket.on('disconnect', function() {
         console.log('user disconnected');
     });
