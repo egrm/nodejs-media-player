@@ -32,26 +32,20 @@ io.on('connection', function(socket) {
     console.log('user connected: ' + socket.id);
     var mediaFilesDir = './app/media/';
 
-    var songNames = fs.readdirSync(mediaFilesDir).filter(isMusicFile);
-
-    console.log(songNames);
-    socket.emit('giveLibrary', {
-        songNames: songNames
+    var watcher = chokidar.watch(mediaFilesDir, {
+      ignored: /(^|[\/\\])\../,
+      persistent: true
     });
 
-    var watcher = chokidar.watch('./app/media', {
-        persistent: true
-    });
-
-    watcher.on('add', function(path) {
-        socket.emit('giveLibrary', {
-            songNames: songNames
-        });
-        console.log('something happened');
+    watcher.on('all', function (event, path) {
+      var songNames = fs.readdirSync(mediaFilesDir).filter(isMusicFile);
+      socket.emit('giveLibrary', {
+        songNames : songNames
+      });
     });
 
     socket.on('songClicked', function playSong(data) {
-
+      console.log('song clicked');
     });
 
     socket.on('disconnect', function() {

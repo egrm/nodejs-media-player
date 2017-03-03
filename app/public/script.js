@@ -5,6 +5,7 @@ var currentSongLabel = document.querySelector('.current-song-label');
 socket.on('connect', function () {
 
   socket.on('giveLibrary', function renderLibrary (data) {
+    console.log('library received');
 
     songsView = '';
 
