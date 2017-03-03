@@ -1,3 +1,58 @@
 body {
-  background-color: green;
+  max-width: 960px;
+  margin: auto;
+  text-align: center;
+  
+  font: 16px/1.5 "Source Code Pro";
+
+  background: url('http://cdn.backgroundhost.com/backgrounds/subtlepatterns/blizzard.png');
+}
+
+h1 {
+  font-weight: lighter;
+}
+
+.media-buttons {
+  margin-top: 3rem;
+}
+
+.media-button {
+  transition: all .3s;
+
+  line-height: 1;
+  display: inline-block;
+  font-size: 1rem;
+  height: 4rem;
+  width: 4rem;
+  border-radius: 50%;
+  text-align: center;
+  background: white;
+  border-style: solid;
+  border-color: black;
+
+}
+
+.media-button:hover {
+  color: white;
+  cursor: pointer;
+  background-color: black;
+}
+
+.song-list {
+  margin-top: 3rem;
+  list-style: none;
+}
+
+.song-list .song {
+  transition: all .3s;
+
+  margin-bottom: 5px;
+  border: 1px solid black;
+  display: block;
+}
+
+.song-list .song:hover {
+  cursor: pointer;
+  background-color: black;
+  color: white;
 }
