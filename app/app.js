@@ -6,19 +6,19 @@ var ss = require ('socket.io-stream');
 var path = require('path');
 var chokidar = require('chokidar');
 
-app.use('/public', express.static('./app/public'))
+app.use('/public', express.static(__dirname + '/public'))
 
 app.set('port', process.env.PORT || 3000);
 
 app.set('view engine', 'ejs');
-app.set('views', './app/views/');
+app.set('views', __dirname + '/views/');
 
 app.get('/', function(req, res) {
     res.render('index');
 });
 
 var server = app.listen(app.get('port'), function() {
-    console.log('node music player listening on port 3000');
+    console.log('node music player listening on port ' + app.get('port'));
 });
 
 function isMusicFile(filename) {

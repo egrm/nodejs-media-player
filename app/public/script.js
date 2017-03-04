@@ -12,8 +12,6 @@ var loadingLabel = document.querySelector('#loading-label');
 socket.on('connect', function() {
 
     socket.on('giveLibrary', function renderLibrary(data) {
-        console.log('library received');
-
         songsView = '';
 
         data.songNames.forEach(function(elem, index, array) {
@@ -60,10 +58,9 @@ socket.on('connect', function() {
 
                 blobStream.on('data', function(chunk) {
                     totalSize += chunk.length;
-                    console.log(blobStream);
                     if (blobStream._readableState.ended) {
                       loadingLabel.style.display = 'none';
-                      console.log('ended!');
+                      console.log('uploaded');
                     } else {
                       loadingLabel.style.display = 'block';
                       loadingLabel.innerHTML = (Math.floor(totalSize / file.size * 100) + '%');
@@ -88,12 +85,11 @@ socket.on('connect', function() {
     uploadFileForm.addEventListener('change', function(e) {
         e.preventDefault();
         e.stopPropagation();
-        console.log(e.target.files[0]);
         // upStream(e.target.files);
     });
 
     socket.on('disconnect', function() {
-        console.log('you failed');
+        console.log('you are disconnected');
     });
 
 }); // on connect
