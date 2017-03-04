@@ -57,17 +57,29 @@ h1 {
   color: white;
 }
 
+#upload-file-form {
+  display: block;
+
+}
+
+#upload-file-form #submit-button {
+  display: none;
+}
+
 #upload-field {
+  transition: all .3s;
   width: 10em;
-  height: 10em;
-  border: 3px dashed black;
+  padding: 4em 1em;
+  outline: 3px dashed black;
+  outline-offset: -15px;
   margin: 6em auto 0;
-  cursor: copy;
+  /*cursor: copy;*/
 }
 
 #upload-field.hover {
   background-color: black;
-  border: 3px dashed white;
+  outline: 3px dashed white;
+  color: white;
 }
 
 .audio-player {

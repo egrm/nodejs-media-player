@@ -7,59 +7,71 @@ var uploadFileForm = document.querySelector("#upload-file-form");
 var uploadFileButton = document.querySelector('#upload-file-button');
 var uploadFileField = document.querySelector('#upload-field');
 
-socket.on('connect', function () {
+socket.on('connect', function() {
 
-  socket.on('giveLibrary', function renderLibrary (data) {
-    console.log('library received');
+    socket.on('giveLibrary', function renderLibrary(data) {
+        console.log('library received');
 
-    songsView = '';
+        songsView = '';
 
-    data.songNames.forEach(function (elem, index, array) {
-      songsView += '<li class="song">' + elem + '</li>';
+        data.songNames.forEach(function(elem, index, array) {
+            songsView += '<li class="song">' + elem + '</li>';
+        });
+
+        songList.innerHTML = songsView;
+
+        var songs = document.querySelector('.song-list').children;
+
+        Object.keys(songs).forEach(function(key) {
+            songs[key].addEventListener('click', function(e) {
+                mediaFilesDir = '/public/media/';
+
+                audioPlayer.src = mediaFilesDir + this.textContent;
+                currentSongLabel.innerHTML = 'Currently playing <br>' + this.textContent;
+
+                socket.emit('songClicked', {
+                    songName: this.textContent
+                }); // emit
+            }); // addEventListener
+        }); // forEach
+
     });
 
-    songList.innerHTML = songsView;
+    function FileDragHover(e) {
+      e.preventDefault();
+      e.target.className = (e.type === 'dragover' ? 'hover' : '');
+    }
 
-    var songs = document.querySelector('.song-list').children;
+    function upStream(files) {
+        // var file = e.target.files[0];
+        Object.keys(files).forEach(function(key) {
+        var file = files[key];
+          var stream = ss.createStream();
 
-    Object.keys(songs).forEach (function (key) {
-      songs[key].addEventListener('click', function (e) {
-        mediaFilesDir = '/public/media/';
+          ss(socket).emit('uploadSong', stream, {
+              name: file.name,
+              size: file.size
+          });
+          ss.createBlobReadStream(file).pipe(stream);
+        });
+    }
 
-        audioPlayer.src = mediaFilesDir + this.textContent;
-        currentSongLabel.innerHTML = 'Currently playing <br>' + this.textContent;
+    uploadFileField.addEventListener('dragover', FileDragHover);
+    uploadFileField.addEventListener('dragleave', FileDragHover);
+    uploadFileField.addEventListener('drop', FileDragHover);
 
-        socket.emit('songClicked', {
-          songName : this.textContent
-        }); // emit
-      }); // addEventListener
-    }); // forEach
 
-  });
+    uploadFileForm.addEventListener('drop', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      upStream(e.dataTransfer.files);
+    });
 
-  function FileDragHover(e) {
-    e.target.classname = (e.type === 'dragover' ? 'hover' : '')
-    console.log(e.target.files);
-  }
-
-  uploadFileField.addEventListener('dragover', FileDragHover);
-  uploadFileField.addEventListener('dragleave', FileDragHover);
-  uploadFileField.addEventListener('drop', FileDragHover);
-
-  uploadFileForm.addEventListener('change', function (e) {
-    var file = e.target.files[0];
-    var stream = ss.createStream();
-
-    ss(socket).emit('uploadSong', stream, {name: file.name, size: file.size});
-    ss.createBlobReadStream(file).pipe(stream);
-  });
-
-socket.on('disconnect', function () {
-  console.log('you failed');
-});
+    socket.on('disconnect', function() {
+        console.log('you failed');
+    });
 
 }); // on connect
 
-socket.on('event', function () {});
-socket.on('disconnect', function () {
-});
+socket.on('event', function() {});
+socket.on('disconnect', function() {});
