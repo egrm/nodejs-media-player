@@ -38,21 +38,22 @@ socket.on('connect', function() {
     });
 
     function FileDragHover(e) {
-      e.preventDefault();
-      e.target.className = (e.type === 'dragover' ? 'hover' : '');
+        e.preventDefault();
+        e.target.className = (e.type === 'dragover' ? 'hover' : '');
     }
 
     function upStream(files) {
         // var file = e.target.files[0];
         Object.keys(files).forEach(function(key) {
-        var file = files[key];
-          var stream = ss.createStream();
-
-          ss(socket).emit('uploadSong', stream, {
-              name: file.name,
-              size: file.size
-          });
-          ss.createBlobReadStream(file).pipe(stream);
+            var file = files[key];
+            if (file.type === 'audio/mp3') {
+              var stream = ss.createStream();
+              ss(socket).emit('uploadSong', stream, {
+                  name: file.name,
+                  size: file.size
+              });
+              ss.createBlobReadStream(file).pipe(stream);
+            }
         });
     }
 
@@ -60,11 +61,17 @@ socket.on('connect', function() {
     uploadFileField.addEventListener('dragleave', FileDragHover);
     uploadFileField.addEventListener('drop', FileDragHover);
 
-
     uploadFileForm.addEventListener('drop', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      upStream(e.dataTransfer.files);
+        e.preventDefault();
+        e.stopPropagation();
+        upStream(e.dataTransfer.files);
+    });
+
+    uploadFileForm.addEventListener('change', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log(e);
+        upStream(e.target.files);
     });
 
     socket.on('disconnect', function() {
