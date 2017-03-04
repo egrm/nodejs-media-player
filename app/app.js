@@ -8,6 +8,7 @@ var chokidar = require('chokidar');
 
 app.use('/public', express.static('./app/public'))
 
+app.set('port', process.env.PORT || 3000);
 
 app.set('view engine', 'ejs');
 app.set('views', './app/views/');
@@ -16,7 +17,7 @@ app.get('/', function(req, res) {
     res.render('index');
 });
 
-var server = app.listen(3000, function() {
+var server = app.listen(app.get('port'), function() {
     console.log('node music player listening on port 3000');
 });
 
@@ -32,7 +33,7 @@ io.attach(server);
 
 io.on('connection', function(socket) {
     console.log('user connected: ' + socket.id);
-    var mediaFilesDir = './app/public/media/';
+    var mediaFilesDir = __dirname + '/public/media/';
 
     var watcher = chokidar.watch(mediaFilesDir, {
       ignored: /(^|[\/\\])\../,
