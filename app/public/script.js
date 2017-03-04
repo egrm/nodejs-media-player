@@ -7,6 +7,8 @@ var uploadFileForm = document.querySelector("#upload-file-form");
 var uploadFileButton = document.querySelector('#upload-file-button');
 var uploadFileField = document.querySelector('#upload-field');
 
+var loadingLabel = document.querySelector('#loading-label');
+
 socket.on('connect', function() {
 
     socket.on('giveLibrary', function renderLibrary(data) {
@@ -46,13 +48,29 @@ socket.on('connect', function() {
         // var file = e.target.files[0];
         Object.keys(files).forEach(function(key) {
             var file = files[key];
+            // totalSize += file.size;
             if (file.type === 'audio/mp3') {
-              var stream = ss.createStream();
-              ss(socket).emit('uploadSong', stream, {
-                  name: file.name,
-                  size: file.size
-              });
-              ss.createBlobReadStream(file).pipe(stream);
+                var stream = ss.createStream();
+                ss(socket).emit('uploadSong', stream, {
+                    name: file.name,
+                    size: file.size
+                });
+                var totalSize = 0;
+                var blobStream = ss.createBlobReadStream(file);
+
+                blobStream.on('data', function(chunk) {
+                    totalSize += chunk.length;
+                    console.log(blobStream);
+                    if (blobStream._readableState.ended) {
+                      loadingLabel.style.display = 'none';
+                      console.log('ended!');
+                    } else {
+                      loadingLabel.style.display = 'block';
+                      loadingLabel.innerHTML = (Math.floor(totalSize / file.size * 100) + '%');
+                    }
+                });
+
+                blobStream.pipe(stream);
             }
         });
     }
@@ -70,8 +88,8 @@ socket.on('connect', function() {
     uploadFileForm.addEventListener('change', function(e) {
         e.preventDefault();
         e.stopPropagation();
-        console.log(e);
-        upStream(e.target.files);
+        console.log(e.target.files[0]);
+        // upStream(e.target.files);
     });
 
     socket.on('disconnect', function() {
