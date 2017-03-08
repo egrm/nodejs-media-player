@@ -15,7 +15,7 @@ socket.on('connect', function() {
         songsView = '';
 
         data.songNames.forEach(function(elem, index, array) {
-            songsView += '<li class="song">' + elem + '</li>';
+            songsView += '<li class="song"><span class="song-name">' + elem + '</span></li>';
         });
 
         songList.innerHTML = songsView;

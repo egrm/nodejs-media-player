@@ -51,10 +51,12 @@ h1 {
   display: block;
 }
 
-.song-list .song:hover {
+
+.song-list .song:hover .song-name {
   cursor: pointer;
   background-color: black;
   color: white;
+  padding: 5px;
 }
 
 #upload-file-form {
