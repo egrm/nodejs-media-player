@@ -2,13 +2,7 @@ body {
   max-width: 960px;
   margin: auto;
   text-align: center;
-<<<<<<< HEAD
-
   font: 14px/1.5 "Anonymous Pro", monospace;
-=======
-  
-  font: 16px/1.5 "Anonymous Pro", monospace;
->>>>>>> 1e86e527bc50ec1149d5189bc019f31945652ad7
 
   background: url('http://cdn.backgroundhost.com/backgrounds/subtlepatterns/cream_dust.png');
 }
