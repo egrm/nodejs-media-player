@@ -8,11 +8,7 @@ body {
 }
 
 @media (max-width: 600px) { 
-  body {
-    font: 12px/1.5 "Anonymous Pro", monospace;
-  }
-  
-  #upload-field {
+  #upload-file-form {
     display: none;
   }
 }
@@ -71,7 +67,6 @@ h1 {
 
 #upload-file-form {
   display: block;
-
 }
 
 #upload-file-form #submit-button {
@@ -81,10 +76,10 @@ h1 {
 #upload-field {
   transition: all .3s;
   width: 10em;
-  padding: 4em 1em;
+  padding: 4rem 1rem;
   outline: 3px dashed black;
   outline-offset: -15px;
-  margin: 6em auto 0;
+  margin: 2rem auto 0;
   /*cursor: copy;*/
 }
 
