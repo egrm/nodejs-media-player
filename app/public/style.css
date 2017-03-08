@@ -7,11 +7,6 @@ body {
   background: url('http://cdn.backgroundhost.com/backgrounds/subtlepatterns/cream_dust.png');
 }
 
-@media (max-width: 600px) { 
-  #upload-file-form {
-    display: none;
-  }
-}
 
 h1 {
   font-weight: lighter;
@@ -67,6 +62,12 @@ h1 {
 
 #upload-file-form {
   display: block;
+}
+
+@media (max-width: 600px) { 
+  #upload-file-form {
+    display: none;
+  }
 }
 
 #upload-file-form #submit-button {
