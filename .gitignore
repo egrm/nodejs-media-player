@@ -3,6 +3,9 @@ logs
 *.log
 npm-debug.log*
 
+app/public/media/*
+!app/public/media/.placeholder
+
 # Runtime data
 pids
 *.pid

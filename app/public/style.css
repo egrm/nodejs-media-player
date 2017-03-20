@@ -2,21 +2,11 @@ body {
   max-width: 960px;
   margin: auto;
   text-align: center;
-  
-  font: 16px/1.5 "Anonymous Pro", monospace;
+  font: 14px/1.5 "Anonymous Pro", monospace;
 
   background: url('http://cdn.backgroundhost.com/backgrounds/subtlepatterns/cream_dust.png');
 }
 
-@media (max-width: 600px) { 
-  body {
-    font: 12px/1.5 "Anonymous Pro", monospace;
-  }
-  
-  #upload-field {
-    display: none;
-  }
-}
 
 h1, h2 {
   font-weight: lighter;
@@ -66,15 +56,22 @@ h1, h2 {
   display: block;
 }
 
-.song-list .song:hover {
+
+.song-list .song:hover .song-name {
   cursor: pointer;
   background-color: black;
   color: white;
+  padding: 5px;
 }
 
 #upload-file-form {
   display: block;
+}
 
+@media (max-width: 600px) { 
+  #upload-file-form {
+    display: none;
+  }
 }
 
 #upload-file-form #submit-button {
@@ -84,10 +81,10 @@ h1, h2 {
 #upload-field {
   transition: all .3s;
   width: 10em;
-  padding: 4em 1em;
+  padding: 4rem 1rem;
   outline: 3px dashed black;
   outline-offset: -15px;
-  margin: 6em auto 0;
+  margin: 2rem auto 0;
   /*cursor: copy;*/
 }
 
