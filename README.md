@@ -1,5 +1,5 @@
 # Node Music Player
 
-Music player, built with NodeJS and WebSockets.
+### Built with NodeJS and WebSockets.
 
-Freshly uploaded songs appear instantly for all users.
+Newly uploaded songs are instantly visible to all users.
